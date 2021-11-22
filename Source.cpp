@@ -1,883 +1,421 @@
-ï»¿#include <iostream>
+#include <iostream>
 #include <windows.h>
 using namespace std;
 #define clear system("cls")
-
-bool turnX = true;
-int area = 0;
-string nolik = "O";
-string krestik = "X";
-string place = "#";
-
-void menu();
-void game();
-void rules()
-{
-	clear;
-	char o;
-	cout << "[ÐŸÑ€Ð°Ð²Ð¸Ð»Ð°]" << endl << endl;
-	cout << "ÐŸÑ€Ð°Ð²Ð¸Ð»Ð° Ð¸Ð³Ñ€Ñ‹. Ð’Ñ‹Ð¸Ð³Ñ€Ð°Ð½Ð½Ð°Ñ Ð¿Ð°Ñ€Ñ‚Ð¸Ñ Ð² ÐºÑ€ÐµÑÑ‚Ð¸ÐºÐ¸-Ð½Ð¾Ð»Ð¸ÐºÐ¸. Ð˜Ð³Ñ€Ð¾ÐºÐ¸ Ð¿Ð¾ Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸ ÑÑ‚Ð°Ð²ÑÑ‚ Ð½Ð° ÑÐ²Ð¾Ð±Ð¾Ð´Ð½Ñ‹Ðµ ÐºÐ»ÐµÑ‚ÐºÐ¸ Ð¿Ð¾Ð»Ñ 3Ã—3 Ð·Ð½Ð°ÐºÐ¸ (Ð¾Ð´Ð¸Ð½ Ð²ÑÐµÐ³Ð´Ð° ÐºÑ€ÐµÑÑ‚Ð¸ÐºÐ¸, Ð´Ñ€ÑƒÐ³Ð¾Ð¹ Ð²ÑÐµÐ³Ð´Ð° Ð½Ð¾Ð»Ð¸ÐºÐ¸). ÐŸÐµÑ€Ð²Ñ‹Ð¹, Ð²Ñ‹ÑÑ‚Ñ€Ð¾Ð¸Ð²ÑˆÐ¸Ð¹ Ð² Ñ€ÑÐ´ 3 ÑÐ²Ð¾Ð¸Ñ… Ñ„Ð¸Ð³ÑƒÑ€Ñ‹ Ð¿Ð¾ Ð²ÐµÑ€Ñ‚Ð¸ÐºÐ°Ð»Ð¸, Ð³Ð¾Ñ€Ð¸Ð·Ð¾Ð½Ñ‚Ð°Ð»Ð¸ Ð¸Ð»Ð¸ Ð´Ð¸Ð°Ð³Ð¾Ð½Ð°Ð»Ð¸, Ð²Ñ‹Ð¸Ð³Ñ€Ñ‹Ð²Ð°ÐµÑ‚. ÐŸÐµÑ€Ð²Ñ‹Ð¹ Ñ…Ð¾Ð´ Ð´ÐµÐ»Ð°ÐµÑ‚ Ð¸Ð³Ñ€Ð¾Ðº, ÑÑ‚Ð°Ð²ÑÑ‰Ð¸Ð¹ ÐºÑ€ÐµÑÑ‚Ð¸ÐºÐ¸. ÐžÐ±Ñ‹Ñ‡Ð½Ð¾ Ð¿Ð¾ Ð·Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¸Ð¸ Ð¿Ð°Ñ€Ñ‚Ð¸Ð¸ Ð²Ñ‹Ð¸Ð³Ñ€Ð°Ð²ÑˆÐ°Ñ ÑÑ‚Ð¾Ñ€Ð¾Ð½Ð° Ð·Ð°Ñ‡Ñ‘Ñ€ÐºÐ¸Ð²Ð°ÐµÑ‚ Ñ‡ÐµÑ€Ñ‚Ð¾Ð¹ ÑÐ²Ð¾Ð¸ Ñ‚Ñ€Ð¸ Ð·Ð½Ð°ÐºÐ° (Ð½Ð¾Ð»Ð¸ÐºÐ° Ð¸Ð»Ð¸ ÐºÑ€ÐµÑÑ‚Ð¸ÐºÐ°), ÑÐ¾ÑÑ‚Ð°Ð²Ð»ÑÑŽÑ‰Ð¸Ñ… ÑÐ¿Ð»Ð¾ÑˆÐ½Ð¾Ð¹ Ñ€ÑÐ´." << endl;
-	cout << "\n[+] ÐÐ°Ð·Ð°Ð´ Ð² Ð¼ÐµÐ½ÑŽ" << endl;
-	cout << "[+] Ð’Ñ‹Ð±Ð¾Ñ€: ";
-	cin >> o;
-	menu();
-}
-void colorKrestik()
-{
-	clear;
-	int choice = 0;
-	cout << "[ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ°] Ð’Ñ‹Ð±Ð¾Ñ€ Ñ†Ð²ÐµÑ‚Ð° ÐºÑ€ÐµÑÑ‚Ð¸ÐºÐ°" << endl;
-	cout << "[1] \x1b[91mX\x1b[0m" << endl;
-	cout << "[2] \x1b[32mX\x1b[0m" << endl;
-	cout << "[3] \x1b[33mX\x1b[0m" << endl;
-	cout << "[4] \x1b[34mX\x1b[0m" << endl;
-	cout << "[5] \x1b[35mX\x1b[0m" << endl;
-	cout << "[6] \x1b[36mX\x1b[0m" << endl;
-	cout << "Ð’Ñ‹Ð±Ð¾Ñ€: ";
-	cin >> choice;
-	switch (choice)
-	{
-	case 1: {
-		krestik = "\x1b[91mX\x1b[0m";
-		break;
-	}
-	case 2: {
-		krestik = "\x1b[32mX\x1b[0m";
-		break;
-	}
-	case 3: {
-		krestik = "\x1b[33mX\x1b[0m";
-		break;
-	}
-	case 4: {
-		krestik = "\x1b[34mX\x1b[0m";
-		break;
-	}
-	case 5: {
-		krestik = "\x1b[35mX\x1b[0m";
-		break;
-	}
-	case 6: {
-		krestik = "\x1b[36mX\x1b[0m";
-		break;
-	}
-	default: {
-		cout << "[ERROR]" << endl;
-		break;
-	}
-	}
-
-}
-void colorNolik()
-{
-	clear;
-	int choice = 0;
-	cout << "[ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸] Ð’Ñ‹Ð±Ð¾Ñ€ Ñ†Ð²ÐµÑ‚Ð° ÐºÑ€ÐµÑÑ‚Ð¸ÐºÐ°" << endl;
-	cout << "[1] \x1b[91mO\x1b[0m" << endl;
-	cout << "[2] \x1b[32mO\x1b[0m" << endl;
-	cout << "[3] \x1b[33mO\x1b[0m" << endl;
-	cout << "[4] \x1b[34mO\x1b[0m" << endl;
-	cout << "[5] \x1b[35mO\x1b[0m" << endl;
-	cout << "[6] \x1b[36mO\x1b[0m" << endl;
-	cout << "Ð’Ñ‹Ð±Ð¾Ñ€: ";
-	cin >> choice;
-	switch (choice)
-	{
-	case 1: {
-		nolik = "\x1b[91mO\x1b[0m";
-		break;
-	}
-	case 2: {
-		nolik = "\x1b[32mO\x1b[0m";
-		break;
-	}
-	case 3: {
-		nolik = "\x1b[33mO\x1b[0m";
-		break;
-	}
-	case 4: {
-		nolik = "\x1b[34mO\x1b[0m";
-		break;
-	}
-	case 5: {
-		nolik = "\x1b[35mO\x1b[0m";
-		break;
-	}
-	case 6: {
-		nolik = "\x1b[36mO\x1b[0m";
-		break;
-	}
-	default: {
-		cout << "[ERROR]" << endl;
-		break;
-	}
-	}
-
-}
-void colorPlace()
-{
-	clear;
-	int choice = 0;
-	cout << "[ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸] Ð’Ñ‹Ð±Ð¾Ñ€ Ñ†Ð²ÐµÑ‚Ð° ÐºÑ€ÐµÑÑ‚Ð¸ÐºÐ°" << endl;
-	cout << "[1] \x1b[91m#\x1b[0m" << endl; //red
-	cout << "[2] \x1b[92m#\x1b[0m" << endl; //green
-	cout << "[3] \x1b[93m#\x1b[0m" << endl; //yellow
-	cout << "[4] \x1b[94m#\x1b[0m" << endl; //blue
-	cout << "[5] \x1b[95m#\x1b[0m" << endl; //purpule
-	cout << "[6] \x1b[96m#\x1b[0m" << endl; //cyan
-	cout << "Ð’Ñ‹Ð±Ð¾Ñ€: ";
-	cin >> choice;
-	switch (choice)
-	{
-	case 1: {
-		place = "\x1b[91m#\x1b[0m";
-		break;
-	}
-	case 2: {
-		place = "\x1b[92m#\x1b[0m";
-		break;
-	}
-	case 3: {
-		place = "\x1b[93m#\x1b[0m";
-		break;
-	}
-	case 4: {
-		place = "\x1b[94m#\x1b[0m";
-		break;
-	}
-	case 5: {
-		place = "\x1b[95m#\x1b[0m";
-		break;
-
-	}case 6: {
-		place = "\x1b[96m#\x1b[0m";
-		break;
-	}
-	default: {
-		cout << "[ERROR]" << endl;
-		break;
-	}
-	}
-
-}
-void boxSize()
-{
-	clear;
-	int size = 0;
-	cout << "[ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸] Ð Ð°Ð·Ð¼ÐµÑ€ Ð¿Ð¾Ð»Ñ\n" << endl;
-	cout << "[1] 3x3" << endl;
-	cout << "[2] 4x4" << endl;
-	cout << "[3] 5x5" << endl;
-	cout << "Ð’Ñ‹Ð±Ð¾Ñ€: ";
-	cin >> size;
-	switch (size)
-	{
-	case 1:
-	{
-		area = 0;
-		break;
-	}
-	case 2:
-	{
-		area = 1;
-		break;
-	}
-	case 3:
-	{
-		area = 2;
-		break;
-	}
-
-	default:
-		break;
-	}
-	
-}
-void settings()
-{
-	clear;
-	int setting = 0;
-	cout << "[ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸]" << endl;
-	cout << "[1] Ð¦Ð²ÐµÑ‚ Ð¿Ð¾Ð»Ñ" << endl;
-	cout << "[2] Ð¦Ð²ÐµÑ‚ ÐºÑ€ÐµÑÑ‚Ð¸ÐºÐ°" << endl;
-	cout << "[3] Ð¦Ð²ÐµÑ‚ Ð½Ð¾Ð»Ð¸ÐºÐ°" << endl;
-	cout << "[4] Ð Ð°Ð·Ð¼ÐµÑ€ Ð¿Ð¾Ð»Ñ" << endl;
-	cout << "[5] Ð’Ñ‹Ñ…Ð¾Ð´ Ð² Ð¼ÐµÐ½ÑŽ" << endl;
-	cout << "\n[+] Ð’Ñ‹Ð±Ð¾Ñ€: ";
-	cin >> setting;
-	switch (setting)
-	{
-	case 1: {
-		colorPlace();
-		settings();
-		break;
-	}
-	case 2: {
-		colorKrestik();
-		settings();
-		break;
-	}
-	case 3: {
-		colorNolik();
-		settings();
-		break;
-	}
-	case 4: {
-		boxSize();
-		settings();
-		break;
-	}
-	case 5: {
-		menu();
-		break;
-	}
-	default: {
-		cout << "[-] Ð¢Ð°ÐºÐ¾Ð³Ð¾ Ð²Ð°Ñ€Ð¸Ð°Ð½Ñ‚Ð° Ð½Ðµ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÐµÑ‚!!" << endl;
-		settings();
-		break;
-	}
-	}
-}
-void menu()
-{
-	clear;
-	int menus;
-	cout << "Ð˜Ð³Ñ€Ð° - [ÐšÑ€ÐµÑÑ‚Ð¸ÐºÐ¸-ÐÐ¾Ð»Ð¸ÐºÐ¸]" << endl << endl;
-	cout << "[1] Ð˜Ð³Ñ€Ð°Ñ‚ÑŒ \n[2] ÐŸÑ€Ð°Ð²Ð¸Ð»Ð° \n[3] ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ \n[4] Ð’Ñ‹Ð¹Ñ‚Ð¸" << endl;
-	cout << "Ð’Ñ‹Ð±Ð¾Ñ€: ";
-	cin >> menus;
-	switch (menus)
-	{
-	case 1: {
-		game();
-		break;
-	}
-	case 2: {
-		rules();
-		break;
-	}
-	case 3: {
-		settings();
-	}
-	case 4:
-		exit(0);
-	}
-}
-
-void game()
-{
-	setlocale(0, "");
-	bool win = true;
-
-	int turn = 0;
-	if (area == 0)
-	{ 
-		const int row = 3;
-		const int columns = 3;
-		int map[row][columns]
-		{
-			{0,0,0},
-			{0,0,0},
-			{0,0,0}
-		};
-
-		clear;
-		while (win == true)
-		{
-			cout << "[Ð˜Ð³Ñ€Ð°] ÐšÑ€ÐµÑÑ‚Ð¸ÐºÐ¸-ÐÐ¾Ð»Ð¸ÐºÐ¸";
-			cout << "\n\n";
-			for (int i = 0; i < row; i++)
-			{
-				cout << "\t\t";
-				for (int j = 0; j < columns; j++)
-				{
-					if (map[i][j] == 0)
-					{
-						cout << place << "    ";
-					}
-					else if (map[i][j] == 1)
-					{
-						cout << krestik << "    ";
-					}
-					else if (map[i][j] == 2)
-					{
-						cout << nolik << "    ";
-					}
-				}
-				cout << "\n\n";
-			}
-			if (turnX == true)
-			{
-				cout << "[+] Ð¥Ð¾Ð´ ÐšÑ€ÐµÑÑ‚Ð¸ÐºÐ°: ";
-				turnX = false;
-			}
-			else
-			{
-				cout << "[+] Ð¥Ð¾Ð´ ÐÐ¾Ð»Ð¸ÐºÐ°: ";
-				turnX = true;
-			}
-			cin >> turn;
-
-			switch (turn)
-			{
-			case 1:
-				if (map[0][0] != 1 && map[0][0] != 2)
-					!turnX ? map[0][0] = 1 : map[0][0] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 2:
-				if (map[0][1] != 1 && map[0][1] != 2)
-					!turnX ? map[0][1] = 1 : map[0][1] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 3:
-				if (map[0][2] != 1 && map[0][2] != 2)
-					!turnX ? map[0][2] = 1 : map[0][2] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 4:
-				if (map[1][0] != 1 && map[1][0] != 2)
-					!turnX ? map[1][0] = 1 : map[1][0] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 5:
-				if (map[1][1] != 1 && map[1][1] != 2)
-					!turnX ? map[1][1] = 1 : map[1][1] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 6:
-				if (map[1][2] != 1 && map[1][2] != 2)
-					!turnX ? map[1][2] = 1 : map[1][2] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 7:
-				if (map[2][0] != 1 && map[2][0] != 2)
-					!turnX ? map[2][0] = 1 : map[2][0] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 8:
-				if (map[2][1] != 1 && map[2][1] != 2)
-					!turnX ? map[2][1] = 1 : map[2][1] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 9:
-				if (map[2][2] != 1 && map[2][2] != 2)
-					!turnX ? map[2][2] = 1 : map[2][2] = 2;
-				else
-					turnX = !turnX;
-				break;
-			}
-			system("cls");
-			if (map[0][0] == 1 && map[0][1] == 1 && map[0][2] == 1 || map[0][0] == 2 && map[0][1] == 2 && map[0][2] == 2 ||
-				map[1][0] == 1 && map[1][1] == 1 && map[1][2] == 1 || map[1][0] == 2 && map[1][1] == 2 && map[1][2] == 2 ||
-				map[2][0] == 1 && map[2][1] == 1 && map[2][2] == 1 || map[2][0] == 2 && map[2][1] == 2 && map[2][2] == 2 ||
-				map[0][1] == 1 && map[1][1] == 1 && map[2][1] == 1 || map[0][1] == 2 && map[1][1] == 2 && map[2][1] == 2 ||
-				map[0][0] == 1 && map[1][0] == 1 && map[2][0] == 1 || map[0][0] == 2 && map[1][0] == 2 && map[2][0] == 2 ||
-				map[0][2] == 1 && map[1][2] == 1 && map[2][2] == 1 || map[0][2] == 2 && map[1][2] == 2 && map[2][2] == 2 ||
-				map[0][2] == 1 && map[1][1] == 1 && map[2][0] == 1 || map[0][2] == 2 && map[1][1] == 2 && map[2][0] == 2 ||
-				map[0][0] == 1 && map[1][1] == 1 && map[2][2] == 1 || map[0][0] == 2 && map[1][1] == 2 && map[2][2] == 2)
-			{
-				if (!turnX == true) {
-
-					cout << "\x1b[92mÐŸÐ¾Ð±ÐµÐ´Ð° ÐºÑ€ÐµÑÑ‚Ð¸ÐºÐ¾Ð²!!!\x1b[0m" << endl;
-					win = false;
-				}
-				else {
-					cout << "\x1b[92mÐŸÐ¾Ð±ÐµÐ´Ð° Ð½Ð¾Ð»Ð¸ÐºÐ¾Ð²!!!\x1b[0m" << endl;
-					win = false;
-				}
-			}
-		}
-		Sleep(3000);
-		exit(0);
-	}
-	else if (area == 1)
-	{
-		const int row = 4;
-		const int columns = 4;
-		int map[row][columns]
-		{
-			{0,0,0,0},
-			{0,0,0,0},
-			{0,0,0,0},
-			{0,0,0,0}
-		};
-
-		clear;
-		while (win == true)
-		{
-			cout << "[Ð˜Ð³Ñ€Ð°] ÐšÑ€ÐµÑÑ‚Ð¸ÐºÐ¸-ÐÐ¾Ð»Ð¸ÐºÐ¸";
-			cout << "\n\n";
-			for (int i = 0; i < row; i++)
-			{
-				cout << "\t\t";
-				for (int j = 0; j < columns; j++)
-				{
-					if (map[i][j] == 0)
-					{
-						cout << place << "    ";
-					}
-					else if (map[i][j] == 1)
-					{
-						cout << krestik << "    ";
-					}
-					else if (map[i][j] == 2)
-					{
-						cout << nolik << "    ";
-					}
-				}
-				cout << "\n\n";
-			}
-			if (turnX == true)
-			{
-				cout << "[+] Ð¥Ð¾Ð´ ÐšÑ€ÐµÑÑ‚Ð¸ÐºÐ°: ";
-				turnX = false;
-			}
-			else
-			{
-				cout << "[+] Ð¥Ð¾Ð´ ÐÐ¾Ð»Ð¸ÐºÐ°: ";
-				turnX = true;
-			}
-			cin >> turn;
-
-			switch (turn)
-			{
-			case 1:
-				if (map[0][0] != 1 && map[0][0] != 2)
-					!turnX ? map[0][0] = 1 : map[0][0] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 2:
-				if (map[0][1] != 1 && map[0][1] != 2)
-					!turnX ? map[0][1] = 1 : map[0][1] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 3:
-				if (map[0][2] != 1 && map[0][2] != 2)
-					!turnX ? map[0][2] = 1 : map[0][2] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 4:
-				if (map[0][3] != 1 && map[0][3] != 2)
-					!turnX ? map[0][3] = 1 : map[0][3] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 5:
-				if (map[1][0] != 1 && map[1][0] != 2)
-					!turnX ? map[1][0] = 1 : map[1][0] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 6:
-				if (map[1][1] != 1 && map[1][1] != 2)
-					!turnX ? map[1][1] = 1 : map[1][1] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 7:
-				if (map[1][2] != 1 && map[1][2] != 2)
-					!turnX ? map[1][2] = 1 : map[1][2] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 8:
-				if (map[1][3] != 1 && map[1][3] != 2)
-					!turnX ? map[1][3] = 1 : map[1][3] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 9:
-				if (map[2][0] != 1 && map[2][0] != 2)
-					!turnX ? map[2][0] = 1 : map[2][0] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 10:
-				if (map[2][1] != 1 && map[2][1] != 2)
-					!turnX ? map[2][1] = 1 : map[2][1] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 11:
-				if (map[2][2] != 1 && map[2][2] != 2)
-					!turnX ? map[2][2] = 1 : map[2][2] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 12:
-				if (map[2][3] != 1 && map[2][3] != 2)
-					!turnX ? map[2][3] = 1 : map[2][3] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 13:
-				if (map[3][0] != 1 && map[3][0] != 2)
-					!turnX ? map[3][0] = 1 : map[3][0] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 14:
-				if (map[3][1] != 1 && map[3][1] != 2)
-					!turnX ? map[3][1] = 1 : map[3][1] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 15:
-				if (map[3][2] != 1 && map[3][2] != 2)
-					!turnX ? map[3][2] = 1 : map[3][2] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 16:
-				if (map[3][3] != 1 && map[3][3] != 2)
-					!turnX ? map[3][3] = 1 : map[3][3] = 2;
-				else
-					turnX = !turnX;
-				break;
-			}
-			system("cls");
-			if (
-				//Ð“Ð¾Ñ€Ð¸Ð·Ð¾Ð½Ñ‚Ð°Ð»ÑŒ
-				map[0][0] == 1 && map[0][1] == 1 && map[0][2] == 1 && map[0][3] == 1 ||
-				map[1][0] == 1 && map[1][1] == 1 && map[1][2] == 1 && map[1][3] == 1 ||
-				map[2][0] == 1 && map[2][1] == 1 && map[2][2] == 1 && map[2][3] == 1 ||
-				map[3][0] == 1 && map[3][1] == 1 && map[3][2] == 1 && map[3][3] == 1 ||
-				//Ð’ÐµÑ€Ñ‚Ð¸ÐºÐ°Ð»ÑŒ
-				map[0][0] == 1 && map[1][0] == 1 && map[2][0] == 1 && map[3][0] == 1 ||
-				map[0][1] == 1 && map[1][1] == 1 && map[2][1] == 1 && map[3][1] == 1 ||
-				map[0][2] == 1 && map[1][2] == 1 && map[2][2] == 1 && map[3][2] == 1 ||
-				map[0][3] == 1 && map[1][3] == 1 && map[2][3] == 1 && map[3][3] == 1 ||
-				//Ð”Ð¸Ð°Ð³Ð¾Ð½Ð°Ð»ÑŒ
-				map[0][0] == 1 && map[1][1] == 1 && map[2][2] == 1 && map[3][3] == 1 ||
-				map[0][3] == 1 && map[1][2] == 1 && map[1][1] == 1 && map[1][0] == 1
-				)
-			{
-				if (!turnX == true) {
-
-					cout << "\x1b[92mÐŸÐ¾Ð±ÐµÐ´Ð° ÐºÑ€ÐµÑÑ‚Ð¸ÐºÐ¾Ð²!!!\x1b[0m" << endl;
-					win = false;
-				}
-				else {
-					cout << "\x1b[92mÐŸÐ¾Ð±ÐµÐ´Ð° Ð½Ð¾Ð»Ð¸ÐºÐ¾Ð²!!!\x1b[0m" << endl;
-					win = false;
-				}
-			}
-			else if (
-				//Ð“Ð¾Ñ€Ð¸Ð·Ð¾Ð½Ñ‚Ð°Ð»ÑŒ
-				map[0][0] == 2 && map[0][1] == 2 && map[0][2] == 2 && map[0][3] == 2 ||
-				map[1][0] == 2 && map[1][1] == 2 && map[1][2] == 2 && map[1][3] == 2 ||
-				map[2][0] == 2 && map[2][1] == 2 && map[2][2] == 2 && map[2][3] == 2 ||
-				map[3][0] == 2 && map[3][1] == 2 && map[3][2] == 2 && map[3][3] == 2 ||
-				//Ð’ÐµÑ€Ñ‚Ð¸ÐºÐ°Ð»ÑŒ
-				map[0][0] == 2 && map[1][0] == 2 && map[2][0] == 2 && map[3][0] == 2 ||
-				map[0][1] == 2 && map[1][1] == 2 && map[2][1] == 2 && map[3][1] == 2 ||
-				map[0][2] == 2 && map[1][2] == 2 && map[2][2] == 2 && map[3][2] == 2 ||
-				map[0][3] == 2 && map[1][3] == 2 && map[2][3] == 2 && map[3][3] == 2 ||
-				//Ð”Ð¸Ð°Ð³Ð¾Ð½Ð°Ð»ÑŒ
-				map[0][0] == 2 && map[1][1] == 2 && map[2][2] == 2 && map[3][3] == 2 ||
-				map[0][3] == 2 && map[1][2] == 2 && map[1][1] == 2 && map[1][0] == 2
-				)
-			{
-				if (!turnX == true) {
-
-					cout << "\x1b[92mÐŸÐ¾Ð±ÐµÐ´Ð° ÐºÑ€ÐµÑÑ‚Ð¸ÐºÐ¾Ð²!!!\x1b[0m" << endl;
-					win = false;
-				}
-				else {
-					cout << "\x1b[92mÐŸÐ¾Ð±ÐµÐ´Ð° Ð½Ð¾Ð»Ð¸ÐºÐ¾Ð²!!!\x1b[0m" << endl;
-					win = false;
-				}
-			}
-		}
-		Sleep(3000);
-		exit(0);
-	}	
-	else if (area == 2)
-	{
-		const int row = 5;
-		const int columns = 5;
-		int map[row][columns]
-		{
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0},
-			{0,0,0,0,0}
-		};
-		clear;
-		while (win == true)
-		{
-			cout << "[Ð˜Ð³Ñ€Ð°] ÐšÑ€ÐµÑÑ‚Ð¸ÐºÐ¸-ÐÐ¾Ð»Ð¸ÐºÐ¸";
-			cout << "\n\n";
-			for (int i = 0; i < row; i++)
-			{
-				cout << "\t\t";
-				for (int j = 0; j < columns; j++)
-				{
-					if (map[i][j] == 0)
-					{
-						cout << place << "    ";
-					}
-					else if (map[i][j] == 1)
-					{
-						cout << krestik << "    ";
-					}
-					else if (map[i][j] == 2)
-					{
-						cout << nolik << "    ";
-					}
-				}
-				cout << "\n\n";
-			}
-			if (turnX == true)
-			{
-				cout << "[+] Ð¥Ð¾Ð´ ÐšÑ€ÐµÑÑ‚Ð¸ÐºÐ°: ";
-				turnX = false;
-			}
-			else
-			{
-				cout << "[+] Ð¥Ð¾Ð´ ÐÐ¾Ð»Ð¸ÐºÐ°: ";
-				turnX = true;
-			}
-			cin >> turn;
-
-			switch (turn)
-			{
-			case 1:
-				if (map[0][0] != 1 && map[0][0] != 2)
-					!turnX ? map[0][0] = 1 : map[0][0] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 2:
-				if (map[0][1] != 1 && map[0][1] != 2)
-					!turnX ? map[0][1] = 1 : map[0][1] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 3:
-				if (map[0][2] != 1 && map[0][2] != 2)
-					!turnX ? map[0][2] = 1 : map[0][2] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 4:
-				if (map[0][3] != 1 && map[0][3] != 2)
-					!turnX ? map[0][3] = 1 : map[0][3] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 5:
-				if (map[0][4] != 1 && map[0][4] != 2)
-					!turnX ? map[0][4] = 1 : map[0][4] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 6:
-				if (map[1][0] != 1 && map[1][0] != 2)
-					!turnX ? map[1][0] = 1 : map[1][0] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 7:
-				if (map[1][1] != 1 && map[1][1] != 2)
-					!turnX ? map[1][1] = 1 : map[1][1] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 8:
-				if (map[1][2] != 1 && map[1][2] != 2)
-					!turnX ? map[1][2] = 1 : map[1][2] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 9:
-				if (map[1][3] != 1 && map[1][3] != 2)
-					!turnX ? map[1][3] = 1 : map[1][3] = 2;
-				else
-					turnX = !turnX;
-				break;
-			case 10:
-				if (map[1][4] != 1 && map[1][4] != 2)
-					!turnX ? map[1][4] = 1 : map[1][4] = 2;
-				else
-					turnX = !turnX;
-				break;
-				case 11:
-				if (map[2][0] != 1 && map[2][0] != 2)
-					!turnX ? map[2][0] = 1 : map[2][0] = 2;
-				else
-					turnX = !turnX;
-				break;
-				case 12:
-				if (map[2][1] != 1 && map[2][1] != 2)
-					!turnX ? map[2][1] = 1 : map[2][1] = 2;
-				else
-					turnX = !turnX;
-				break;
-				case 13:
-				if (map[2][2] != 1 && map[2][2] != 2)
-					!turnX ? map[2][2] = 1 : map[2][2] = 2;
-				else
-					turnX = !turnX;
-				break;
-				case 14:
-				if (map[2][3] != 1 && map[2][3] != 2)
-					!turnX ? map[2][3] = 1 : map[2][3] = 2;
-				else
-					turnX = !turnX;
-				break;
-				case 15:
-				if (map[2][4] != 1 && map[2][4] != 2)
-					!turnX ? map[2][4] = 1 : map[2][4] = 2;
-				else
-					turnX = !turnX;
-				break;
-				case 16:
-				if (map[3][0] != 1 && map[3][0] != 2)
-					!turnX ? map[3][0] = 1 : map[3][0] = 2;
-				else
-					turnX = !turnX;
-				break;
-				case 17:
-				if (map[3][1] != 1 && map[3][1] != 2)
-					!turnX ? map[3][1] = 1 : map[3][1] = 2;
-				else
-					turnX = !turnX;
-				break;
-				case 18:
-				if (map[3][2] != 1 && map[3][2] != 2)
-					!turnX ? map[3][2] = 1 : map[3][2] = 2;
-				else
-					turnX = !turnX;
-				break;
-				case 19:
-				if (map[3][3] != 1 && map[3][3] != 2)
-					!turnX ? map[3][3] = 1 : map[3][3] = 2;
-				else
-					turnX = !turnX;
-				break;
-				case 20:
-				if (map[3][4] != 1 && map[3][4] != 2)
-					!turnX ? map[3][4] = 1 : map[3][4] = 2;
-				else
-					turnX = !turnX;
-				break;
-				case 21:
-				if (map[4][0] != 1 && map[4][0] != 2)
-					!turnX ? map[4][0] = 1 : map[4][0] = 2;
-				else
-					turnX = !turnX;
-				break;
-				case 22:
-				if (map[4][1] != 1 && map[4][1] != 2)
-					!turnX ? map[4][1] = 1 : map[4][1] = 2;
-				else
-					turnX = !turnX;
-				break;
-				case 23:
-				if (map[4][2] != 1 && map[4][2] != 2)
-					!turnX ? map[4][2] = 1 : map[4][2] = 2;
-				else
-					turnX = !turnX;
-				break;
-				case 24:
-				if (map[4][3] != 1 && map[4][3] != 2)
-					!turnX ? map[4][3] = 1 : map[4][3] = 2;
-				else
-					turnX = !turnX;
-				break;
-				case 25:
-				if (map[4][4] != 1 && map[4][4] != 2)
-					!turnX ? map[4][4] = 1 : map[4][4] = 2;
-				else
-					turnX = !turnX;
-				break;
-			}
-			system("cls");
-			if (
-				//Ð“Ð¾Ñ€Ð¸Ð·Ð¾Ð½Ñ‚Ð°Ð»ÑŒ
-				map[0][0] == 1 && map[0][1] == 1 && map[0][2] == 1 && map[0][3] == 1 && map[0][4] == 1 ||
-				map[1][0] == 1 && map[1][1] == 1 && map[1][2] == 1 && map[1][3] == 1 && map[1][4] == 1 ||
-				map[2][0] == 1 && map[2][1] == 1 && map[2][2] == 1 && map[2][3] == 1 && map[2][4] == 1 ||
-				map[3][0] == 1 && map[3][1] == 1 && map[3][2] == 1 && map[3][3] == 1 && map[3][4] == 1 ||
-				map[4][0] == 1 && map[4][1] == 1 && map[4][2] == 1 && map[4][3] == 1 && map[4][4] == 1 ||
-				//Ð’ÐµÑ€Ñ‚Ð¸ÐºÐ°Ð»ÑŒ
-				map[0][0] == 1 && map[1][0] == 1 && map[2][0] == 1 && map[3][0] == 1 && map[4][0] == 1 ||
-				map[0][1] == 1 && map[1][1] == 1 && map[2][1] == 1 && map[3][1] == 1 && map[4][1] == 1 ||
-				map[0][2] == 1 && map[1][2] == 1 && map[2][2] == 1 && map[3][2] == 1 && map[4][2] == 1 ||
-				map[0][3] == 1 && map[1][3] == 1 && map[2][3] == 1 && map[3][3] == 1 && map[4][3] == 1 ||
-				map[0][4] == 1 && map[1][4] == 1 && map[2][4] == 1 && map[3][4] == 1 && map[4][4] == 1 ||
-				//Ð”Ð¸Ð°Ð³Ð¾Ð½Ð°Ð»ÑŒ
-				map[0][0] == 1 && map[1][1] == 1 && map[2][2] == 1 && map[3][3] == 1 && map[4][4] == 1 ||
-				map[0][4] == 1 && map[1][3] == 1 && map[2][2] == 1 && map[3][1] == 1 && map[4][0] == 1
-				)
-			{
-				if (!turnX == true) {
-
-					cout << "\x1b[92mÐŸÐ¾Ð±ÐµÐ´Ð° ÐºÑ€ÐµÑÑ‚Ð¸ÐºÐ¾Ð²!!!\x1b[0m" << endl;
-					win = false;
-				}
-				else {
-					cout << "\x1b[92mÐŸÐ¾Ð±ÐµÐ´Ð° Ð½Ð¾Ð»Ð¸ÐºÐ¾Ð²!!!\x1b[0m" << endl;
-					win = false;
-				}
-			}
-			else if 
-				(
-					//Ð“Ð¾Ñ€Ð¸Ð·Ð¾Ð½Ñ‚Ð°Ð»ÑŒ
-					map[0][0] == 2 && map[0][1] == 2 && map[0][2] == 2 && map[0][3] == 2 && map[0][4] == 2 ||
-					map[1][0] == 2 && map[1][1] == 2 && map[1][2] == 2 && map[1][3] == 2 && map[1][4] == 2 ||
-					map[2][0] == 2 && map[2][1] == 2 && map[2][2] == 2 && map[2][3] == 2 && map[2][4] == 2 ||
-					map[3][0] == 2 && map[3][1] == 2 && map[3][2] == 2 && map[3][3] == 2 && map[3][4] == 2 ||
-					map[4][0] == 2 && map[4][1] == 2 && map[4][2] == 2 && map[4][3] == 2 && map[4][4] == 2 ||
-					//Ð’ÐµÑ€Ñ‚Ð¸ÐºÐ°Ð»ÑŒ
-					map[0][0] == 2 && map[1][0] == 2 && map[2][0] == 2 && map[3][0] == 2 && map[4][0] == 2 ||
-					map[0][1] == 2 && map[1][1] == 2 && map[2][1] == 2 && map[3][1] == 2 && map[4][1] == 2 ||
-					map[0][2] == 2 && map[1][2] == 2 && map[2][2] == 2 && map[3][2] == 2 && map[4][2] == 2 ||
-					map[0][3] == 2 && map[1][3] == 2 && map[2][3] == 2 && map[3][3] == 2 && map[4][3] == 2 ||
-					map[0][4] == 2 && map[1][4] == 2 && map[2][4] == 2 && map[3][4] == 2 && map[4][4] == 2 ||
-					//Ð”Ð¸Ð°Ð³Ð¾Ð½Ð°Ð»ÑŒ
-					map[0][0] == 2 && map[1][1] == 2 && map[2][2] == 2 && map[3][3] == 2 && map[4][4] == 2 ||
-					map[0][4] == 2 && map[1][3] == 2 && map[2][2] == 2 && map[3][1] == 2 && map[4][0] == 2
-				)
-			{
-				if (!turnX == true) {
-
-					cout << "\x1b[92mÐŸÐ¾Ð±ÐµÐ´Ð° ÐºÑ€ÐµÑÑ‚Ð¸ÐºÐ¾Ð²!!!\x1b[0m" << endl;
-					win = false;
-				}
-				else {
-					cout << "\x1b[92mÐŸÐ¾Ð±ÐµÐ´Ð° Ð½Ð¾Ð»Ð¸ÐºÐ¾Ð²!!!\x1b[0m" << endl;
-					win = false;
-				}
-			}
-		}
-		Sleep(3000);
-		exit(0);
-	}
-	}
-
 
 
 int main()
 {
 	setlocale(0, "");
-	menu();
-
+	int i =         0;
+	int dlina =     0;
+	int shirina =   0;
+	int figure =    0;
+	char symb =   ' ';
+	int size =      0;
+	int type =      0;
+	int sqrtype =   0;
+	int sqrsize =   0;
+	int recttype =  0;
+	int rectsize =  0; 
 	
-	int _; cin >> _;
+	cout << "[+]Ïðîãðàììà - " << "'Ãåîìåòðè÷åñêèå ôèãóðû'" << endl;
+	cout << "\n[1] Ëèíèÿ [2] Êâàäðàò [3] Òðåóãîëüíèê [4] Êðåñòèê [5] Ïëþñ [6] Ðåøåòêà [7] Ïðÿìîóãîëüíèê" << endl << endl;;
+	cout << "[+] Âûáåðèòå ôèãóðó: ";
+	std::cin >> figure;
+	clear;
+
+	switch (figure)
+	{
+	case 1:
+	{
+
+		cout << "[+] Ôèãóðà - Ëèíèÿ" << endl;
+		cout << "\n[1] Ãîðèçîíòàëüíàÿ\n[2] Âåðòèêàëüíàÿ" << endl;
+		cout << "\n[+] Âûáåðèòå òèï: ";
+		std::cin >> type;
+		switch (type)
+		{
+		case 1:
+		{
+			cout << "[+] Ôèãóðà - Ëèíèÿ\n[+] Òèï ôèãóðû - Ãîðèçîíòàëüíàÿ" << endl;
+			cout << "\n[+] Ââåäèòå ðàçìåð ôèãóðû: ";
+			std::cin >> size;
+			if (std::cin.fail())
+			{
+				cout << "òàêîãî âàðèàíòà íå ñóùåñòâóåò" << endl;
+				return 0;
+			}
+			cout << "[+] Âûáåðèòå ñèìâîë èç êîòîðîãî áóäåò ñîñòîÿòü ôèãóðà: ";
+			std::cin >> symb;
+			while (i < size)
+			{
+				cout << symb;
+				i++;
+			}
+			break;
+		}
+		case 2:
+		{
+			cout << "[+] Ôèãóðà - Ëèíèÿ\n[+] Òèï ôèãóðû - Âåðòèêàëüíàÿ" << endl;
+			cout << "\n[+] Ââåäèòå ðàçìåð ôèãóðû: ";
+			std::cin >> size;
+			if (std::cin.fail())
+			{
+				cout << "òàêîãî âàðèàíòà íå ñóùåñòâóåò" << endl;
+				return 0;
+			}
+			cout << "\n[+] Âûáåðèòå ñèìâîë èç êîòîðîãî áóäåò ñîñòîÿòü ôèãóðà: ";
+			std::cin >> symb;
+			while (i < size)
+			{
+				cout << symb << endl;
+				i++;
+			}
+			break;
+		}
+
+
+		default:
+		{
+			cout << "Òàêîãî âàðèàíòà íå ñóùåñòâóåò" << endl;
+			return 0;
+			break;
+		}
+		}
+		break;
+	}
+	case 2:
+	{
+
+		cout << "[+] Ôèãóðà - Êâàäðàò" << endl;
+		cout << "\n[1] Çàïîëíåíûé\n[2] Ïîëûé" << endl;
+		cout << "\n[+] Âûáåðèòå òèï: ";
+		std::cin >> sqrtype;
+		switch (sqrtype)
+		{
+		case 1:
+		{
+			clear;
+			cout << "[+] Ôèãóðà - Êâàäðàò" << endl;
+			cout << "[+] Òèï - Çàïîëíåíûé" << endl;
+			cout << "\n[+] Ââåäèòå ðàçìåð êâàäðàòà: ";
+			cin >> sqrsize;
+			if (cin.fail())
+			{
+				cout << "Òàêîãî âàðèàíòà íå ñóùåñòâóåò!!" << endl;
+				return 0;
+			}
+			for (int j = 0; j < sqrsize; j++)
+			{
+				for (int i = 0; i < sqrsize; i++)
+				{
+					cout << "# ";
+				}
+				cout << endl;
+			}
+			break;
+		}
+		case 2:
+		{
+			clear;
+			cout << "[+] Ôèãóðà - Êâàäðàò" << endl;
+			cout << "\n[+] Òèï - Ïîëûé" << endl;
+			cout << "\n[+] Ââåäèòå äëèíó êâàäðàòà: ";
+			cout << "\n[+] Ââåäèòå ðàçìåð êâàäðàòà: ";
+			std::cin >> sqrsize;
+			if (std::cin.fail())
+			{
+				cout << "Òàêîãî âàðèàíòà íå ñóùåñòâóåò!!" << endl;
+				return 0;
+			}
+			for (int j = 0; j < sqrsize; j++)
+			{
+				for (int i = 0; i < sqrsize; i++)
+				{
+					(j == 0 || j == sqrsize - 1 || i == 0 || i == sqrsize - 1) ? cout << "# " : cout << "  ";
+				}
+				cout << endl;
+			}
+			break;
+		}
+
+		default:
+		{
+			clear;
+			cout << "[+] Òàêîãî âàðèàíòà íå ñóùåñòâóåò" << endl;
+			return 0;
+			break;
+		}
+		}
+		break;
+	}
+	case 3:
+	{
+		clear;
+		cout << "[+] Ôèãóðà - Òðåóãîëüíèê" << endl;
+		bool test = true;;
+		while (test == true)
+		{
+			clear;
+			cout << "\n[+] Ââåäèòå ðàçìåð: ";
+			cin >> size;
+			if (size % 2 != 0)
+			{
+				test = false;
+			}
+			else
+			{
+				cout << "Ââîä ÷åòíûõ ÷èñåë çàïðåù¨í!!";
+				Sleep(2000);
+			}
+		}
+		int j = 0;
+		for (int y = 0; y < size; y++)
+		{
+
+			cout << "\t";
+			for (int x = 0; x < size; x++)														
+			{
+				if (x == size / 2 && y == 0 ||
+					x == size / 2 - j && y == j ||
+					x == size / 2 + j && y == j ||
+					y == size / 2)
+				{
+					cout << "# ";
+				}
+				else
+				{
+					cout << "  ";
+				}
+			}
+			cout << endl;
+			j++;
+		}
+		break;
+	}
+	case 4:
+	{
+		clear;
+		cout << "[+] Ôèãóðà - Êðåñòèê" << endl;
+		bool test = true;;
+		while (test == true)
+		{
+			clear;
+			cout << "\n[+] Ââåäèòå ðàçìåð: ";
+			cin >> size;
+			if (size % 2 != 0)
+			{
+				test = false;
+
+			}
+			else
+			{
+				cout << "Ââîä ÷åòíûõ ÷èñåë çàïðåù¨í!!";
+				Sleep(2000);
+			}
+		}
+		int j = 0;
+		for (int y = 0; y < size; y++)
+		{
+
+			cout << "\t";
+			for (int x = 0; x < size; x++)														
+			{
+				if (x == size - y || y == x + 1)
+				{
+					cout << "# ";
+				}
+				else
+				{
+					cout << "  ";
+				}
+			}
+			cout << endl;
+			j++;
+		}
+		break;
+	}
+	case 5:
+	{
+		clear;
+		cout << "[+] Ôèãóðà - Ïëþñ" << endl;
+		bool test = true;;
+		while (test == true)
+		{
+			clear;
+			cout << "\n[+] Ââåäèòå ðàçìåð: ";
+			cin >> size;
+			if (size % 2 != 0)
+			{
+				test = false;
+
+			}
+			else
+			{
+				cout << "Ââîä ÷åòíûõ ÷èñåë çàïðåù¨í!!";
+				Sleep(2000);
+			}
+		}
+		int j = 0;
+		for (int y = 0; y < size; y++)
+		{
+
+			cout << "\t";
+			for (int x = 0; x < size; x++)			
+			{
+				if (x%2 == 1|| y%2 == 1)
+				{
+					cout << "# ";
+				}
+				else
+				{
+					cout << "  ";
+				}
+			}
+			cout << endl;
+			j++;
+		}
+		break;
+	}
+	case 6:
+	{
+		clear;
+		cout << "[+] Ôèãóðà - Ðåøåòêà" << endl;
+		bool test = true;;
+		while (test == true)
+		{
+			clear;
+			cout << "\n[+] Ââåäèòå ðàçìåð: ";
+			cin >> size;
+			if (size % 2 != 0)
+			{
+				test = false;
+
+			}
+			else
+			{
+				cout << "Ââîä ÷åòíûõ ÷èñåë çàïðåù¨í!!";
+				Sleep(2000);
+			}
+		}
+		int j = 0;
+		for (int y = 0; y < size; y++)
+		{
+
+			cout << "\t";
+			for (int x = 0; x < size; x++)		
+			{
+				if (x % 2 == 1 || y % 2 == 1)
+				{
+					cout << "# ";
+				}
+				else
+				{
+					cout << "  ";
+				}
+			}
+			cout << endl;
+			j++;
+		}
+		break;
+	}
+	case 7:
+	{
+		cout << "[+] Ôèãóðà - Ïðÿìîóãîëüíèê" << endl;
+		cout << "\n[1] Ïîëûé\n[2] Çàïîëíåíûé" << endl;
+		cout << "\n[+] Âûáåðèòå òèï: ";
+		std::cin >> recttype;
+		switch (recttype)
+		{
+		case 1:
+		{
+			clear;
+			cout << "[+] Ôèãóðà - Ïðÿìîóãîëüíèê" << endl;
+			cout << "\n[+] Òèï - Ïîëûé" << endl;
+			cout << "\n[+] Ââåäèòå äëèíó ïðÿìîóãîëüíèêà: ";
+			std::cin >> dlina;
+			if (std::cin.fail())
+			{
+				cout << "Òàêîãî âàðèàíòà íå ñóùåñòâóåò!!" << endl;
+				return 0;
+			}
+			cout << "\n[+] Ââåäèòå øèðèíó ïðÿìîóãîëüíèêà: ";
+			std::cin >> shirina;
+			if (std::cin.fail())
+			{
+				cout << "Òàêîãî âàðèàíòà íå ñóùåñòâóåò!!" << endl;
+				return 0;
+			}
+			if (dlina == shirina)
+			{
+				cout << "\n[-] Äàííûå çíà÷åíèÿ íå äîïóñòèíû äëÿ ôèãóðû - \"Ïðÿìîóãîëüíèê\"" << endl;
+				return 0;
+			}
+			for (int j = 0; j < dlina; j++)
+			{
+				for (int i = 0; i < shirina; i++)
+				{
+					(j == 0 || j == dlina - 1 || i == 0 || i == shirina - 1) ? cout << "# " : cout << "  ";
+				}
+				cout << endl;
+			}			
+			break;
+		}
+		case 2:
+		{
+			clear;
+			cout << "[+] Ôèãóðà - Ïðÿìîóãîëüíèê" << endl;
+			cout << "\n[+] Òèï - Çàïîëíåíûé" << endl;
+			cout << "\n[+] Ââåäèòå äëèíó ïðÿìîóãîëüíèêà: ";
+			std::cin >> dlina;
+			if (std::cin.fail())
+			{
+				cout << "Òàêîãî âàðèàíòà íå ñóùåñòâóåò!!" << endl;
+				return 0;
+			}
+			cout << "\n[+] Ââåäèòå øèðèíó ïðÿìîóãîëüíèêà: ";
+			std::cin >> shirina;
+			if (std::cin.fail())
+			{
+				cout << "Òàêîãî âàðèàíòà íå ñóùåñòâóåò!!" << endl;
+				return 0;
+			}
+			if (dlina == shirina)
+			{
+				cout << "\n[-] Äàííûå çíà÷åíèÿ íå äîïóñòèíû äëÿ ôèãóðû - \"Ïðÿìîóãîëüíèê\"" << endl;
+				return 0;
+			}
+			for (int j = 0; j < dlina; j++)
+			{
+				for (int i = 0; i < shirina; i++)
+				{				
+						cout << "# ";				
+				}
+				cout << endl;
+			}
+			break;
+		}
+		default:
+		{
+			clear;
+			cout << "[+] Òàêîãî âàðèàíòà íå ñóùåñòâóåò" << endl;
+			return 0;
+			break;
+		}
+		}
+		break;
+	}
+	default:
+	{
+		cout << "[+] Òàêîãî âàðèàíòà íå ñóùåñòâóåò" << endl;
+		return 0;
+		break;
+	}
+	}
+	
+	
+	
+	int _; std::cin >> _;
 	return 0;
 }
